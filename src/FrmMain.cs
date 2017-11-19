@@ -31,7 +31,8 @@ namespace DViz
                 getProcessStartInfoQuery,
                 registerLayoutPluginCommand);
 
-            //clbNodesToIclude.Size = new Size(1399, 532);
+            clbNodesToIclude.Height = splitContainer1.Panel1.Height - 5;
+            clbNodesToIclude.Width = splitContainer1.Panel1.Width - 130;
         }
 
         private SimpleDotGraph _graph;
