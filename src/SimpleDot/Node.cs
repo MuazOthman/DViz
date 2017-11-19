@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace DViz.SimpleDot
 {
-    class Node
+    internal class Node
     {
         private readonly List<Node> _children;
         private readonly string _name;

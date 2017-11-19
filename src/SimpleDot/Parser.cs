@@ -4,8 +4,10 @@ using System.Linq;
 
 namespace DViz.SimpleDot
 {
-    class Parser
+    internal class Parser
     {
+
+        private string _startNodeName;
         /// <summary>
         /// Syntax:
         /// - Every line is for an edge: node1 -> node2
@@ -17,8 +19,17 @@ namespace DViz.SimpleDot
         public SimpleDotGraph Parse(string simpleDot)
         {
             var lines = simpleDot.Split(new[] { "\r\n", "\n" }, StringSplitOptions.RemoveEmptyEntries);
-            var parserNodesLookup = new Dictionary<string, ParserNode>();
-            ParserNode rootParserNode = null;
+            ParserNode rootParserNode = new ParserNode(_startNodeName);
+            var parserNodesLookup = new Dictionary<string, ParserNode>
+            {
+                {_startNodeName,  rootParserNode}
+            };
+
+            var nodeHasParentLookup = new Dictionary<string, bool>
+            {
+                {_startNodeName, true }
+            };
+
             var lineNumber = 1;
             foreach (var line in lines)
             {
@@ -42,11 +53,14 @@ namespace DViz.SimpleDot
                 var fromParserNode = parserNodesLookup[fromNodeName];
                 var toParserNode = parserNodesLookup[toNodeName];
                 fromParserNode.Children.Add(toParserNode);
-
-                if (rootParserNode == null)
-                    rootParserNode = fromParserNode;
-
+                if(!nodeHasParentLookup.ContainsKey(toNodeName))
+                    nodeHasParentLookup.Add(toNodeName, true);
                 lineNumber++;
+            }
+            foreach (var nodeName in parserNodesLookup.Keys)
+            {
+                if(!nodeHasParentLookup.ContainsKey(nodeName))
+                    rootParserNode.Children.Add(parserNodesLookup[nodeName]);
             }
             _nodesLookup = new Dictionary<string, Node>();
             var root = ConvertToNode(rootParserNode);
@@ -54,6 +68,11 @@ namespace DViz.SimpleDot
         }
 
         private Dictionary<string, Node> _nodesLookup;
+
+        public Parser(string startNodeName)
+        {
+            _startNodeName = startNodeName;
+        }
 
         private Node ConvertToNode(ParserNode n)
         {
@@ -78,7 +97,7 @@ namespace DViz.SimpleDot
         }
     }
 
-    class SimpleDotGraph
+    internal class SimpleDotGraph
     {
         public SimpleDotGraph(Node root, IReadOnlyDictionary<string, Node> allNodes)
         {

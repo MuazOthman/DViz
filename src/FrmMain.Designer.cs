@@ -45,9 +45,10 @@
             // 
             // btnLoadFIle
             // 
-            this.btnLoadFIle.Location = new System.Drawing.Point(12, 12);
+            this.btnLoadFIle.Location = new System.Drawing.Point(16, 18);
+            this.btnLoadFIle.Margin = new System.Windows.Forms.Padding(4);
             this.btnLoadFIle.Name = "btnLoadFIle";
-            this.btnLoadFIle.Size = new System.Drawing.Size(150, 28);
+            this.btnLoadFIle.Size = new System.Drawing.Size(206, 42);
             this.btnLoadFIle.TabIndex = 0;
             this.btnLoadFIle.Text = "Open File";
             this.btnLoadFIle.UseVisualStyleBackColor = true;
@@ -61,10 +62,10 @@
             // pic1
             // 
             this.pic1.BackColor = System.Drawing.Color.White;
-            this.pic1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pic1.Location = new System.Drawing.Point(0, 0);
+            this.pic1.Margin = new System.Windows.Forms.Padding(4);
             this.pic1.Name = "pic1";
-            this.pic1.Size = new System.Drawing.Size(1193, 369);
+            this.pic1.Size = new System.Drawing.Size(1640, 554);
             this.pic1.TabIndex = 1;
             this.pic1.TabStop = false;
             // 
@@ -72,31 +73,34 @@
             // 
             this.splitContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer1.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer1.Panel1
             // 
+            this.splitContainer1.Panel1.Controls.Add(this.clbNodesToIclude);
             this.splitContainer1.Panel1.Controls.Add(this.btnReverseSelection);
             this.splitContainer1.Panel1.Controls.Add(this.btnUnselectAll);
             this.splitContainer1.Panel1.Controls.Add(this.btnSelectAll);
-            this.splitContainer1.Panel1.Controls.Add(this.clbNodesToIclude);
             this.splitContainer1.Panel1.Controls.Add(this.btnLoadFIle);
             // 
             // splitContainer1.Panel2
             // 
+            this.splitContainer1.Panel2.AutoScroll = true;
             this.splitContainer1.Panel2.Controls.Add(this.pic1);
-            this.splitContainer1.Size = new System.Drawing.Size(1193, 753);
-            this.splitContainer1.SplitterDistance = 376;
-            this.splitContainer1.SplitterWidth = 8;
+            this.splitContainer1.Size = new System.Drawing.Size(1640, 1130);
+            this.splitContainer1.SplitterDistance = 564;
+            this.splitContainer1.SplitterWidth = 12;
             this.splitContainer1.TabIndex = 2;
             // 
             // btnReverseSelection
             // 
             this.btnReverseSelection.Enabled = false;
-            this.btnReverseSelection.Location = new System.Drawing.Point(12, 114);
+            this.btnReverseSelection.Location = new System.Drawing.Point(16, 171);
+            this.btnReverseSelection.Margin = new System.Windows.Forms.Padding(4);
             this.btnReverseSelection.Name = "btnReverseSelection";
-            this.btnReverseSelection.Size = new System.Drawing.Size(150, 28);
+            this.btnReverseSelection.Size = new System.Drawing.Size(206, 42);
             this.btnReverseSelection.TabIndex = 4;
             this.btnReverseSelection.Text = "Reverse Selection";
             this.btnReverseSelection.UseVisualStyleBackColor = true;
@@ -105,9 +109,10 @@
             // btnUnselectAll
             // 
             this.btnUnselectAll.Enabled = false;
-            this.btnUnselectAll.Location = new System.Drawing.Point(12, 80);
+            this.btnUnselectAll.Location = new System.Drawing.Point(16, 120);
+            this.btnUnselectAll.Margin = new System.Windows.Forms.Padding(4);
             this.btnUnselectAll.Name = "btnUnselectAll";
-            this.btnUnselectAll.Size = new System.Drawing.Size(150, 28);
+            this.btnUnselectAll.Size = new System.Drawing.Size(206, 42);
             this.btnUnselectAll.TabIndex = 3;
             this.btnUnselectAll.Text = "Unselect All";
             this.btnUnselectAll.UseVisualStyleBackColor = true;
@@ -116,9 +121,10 @@
             // btnSelectAll
             // 
             this.btnSelectAll.Enabled = false;
-            this.btnSelectAll.Location = new System.Drawing.Point(12, 46);
+            this.btnSelectAll.Location = new System.Drawing.Point(16, 69);
+            this.btnSelectAll.Margin = new System.Windows.Forms.Padding(4);
             this.btnSelectAll.Name = "btnSelectAll";
-            this.btnSelectAll.Size = new System.Drawing.Size(150, 28);
+            this.btnSelectAll.Size = new System.Drawing.Size(206, 42);
             this.btnSelectAll.TabIndex = 2;
             this.btnSelectAll.Text = "Select All";
             this.btnSelectAll.UseVisualStyleBackColor = true;
@@ -126,19 +132,23 @@
             // 
             // clbNodesToIclude
             // 
+            this.clbNodesToIclude.ColumnWidth = 150;
             this.clbNodesToIclude.FormattingEnabled = true;
-            this.clbNodesToIclude.Location = new System.Drawing.Point(168, 12);
+            this.clbNodesToIclude.Location = new System.Drawing.Point(228, 13);
+            this.clbNodesToIclude.Margin = new System.Windows.Forms.Padding(4);
+            this.clbNodesToIclude.MultiColumn = true;
             this.clbNodesToIclude.Name = "clbNodesToIclude";
-            this.clbNodesToIclude.Size = new System.Drawing.Size(245, 344);
+            this.clbNodesToIclude.Size = new System.Drawing.Size(1399, 532);
             this.clbNodesToIclude.TabIndex = 1;
             this.clbNodesToIclude.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.clbNodesToIclude_ItemCheck);
             // 
             // FrmMain
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1193, 753);
+            this.ClientSize = new System.Drawing.Size(1640, 1130);
             this.Controls.Add(this.splitContainer1);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "FrmMain";
             this.Text = "DViz";
             ((System.ComponentModel.ISupportInitialize)(this.pic1)).EndInit();
