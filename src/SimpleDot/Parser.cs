@@ -7,14 +7,12 @@ namespace DViz.SimpleDot
     internal class Parser
     {
 
-        private readonly string _startNodeName;
+        private string _startNodeName;
         /// <summary>
         /// Syntax:
-        /// - Every line is either
-        ///    - for an edge: node1 -> node2 or node1 => node2
-        ///    - or for a node: node1
+        /// - Every line is for an edge: node1 -> node2
+        /// - First node to appear is the root
         /// - no styling or attributes are allowed
-        /// - node names are case sensitive and can contain any character except for the strings "->" and "=>"
         /// </summary>
         /// <param name="simpleDot"></param>
         /// <returns></returns>
@@ -36,35 +34,32 @@ namespace DViz.SimpleDot
             foreach (var line in lines)
             {
                 var parts = line.Split(new[] { "->", "=>" }, StringSplitOptions.RemoveEmptyEntries);
-                if (parts.Length > 2)
+                if (parts.Length != 2)
                 {
                     throw new Exception($"Cannot parse line {lineNumber}: '{line}'");
                 }
+
                 var fromNodeName = parts[0].Trim();
+                var toNodeName = parts[1].Trim();
                 if (!parserNodesLookup.ContainsKey(fromNodeName))
                 {
                     parserNodesLookup.Add(fromNodeName, new ParserNode(fromNodeName));
                 }
-                if (parts.Length == 2)
+                if (!parserNodesLookup.ContainsKey(toNodeName))
                 {
-                    var toNodeName = parts[1].Trim();
-
-                    if (!parserNodesLookup.ContainsKey(toNodeName))
-                    {
-                        parserNodesLookup.Add(toNodeName, new ParserNode(toNodeName));
-                    }
-
-                    var fromParserNode = parserNodesLookup[fromNodeName];
-                    var toParserNode = parserNodesLookup[toNodeName];
-                    fromParserNode.Children.Add(toParserNode);
-                    if (!nodeHasParentLookup.ContainsKey(toNodeName))
-                        nodeHasParentLookup.Add(toNodeName, true);
+                    parserNodesLookup.Add(toNodeName, new ParserNode(toNodeName));
                 }
+
+                var fromParserNode = parserNodesLookup[fromNodeName];
+                var toParserNode = parserNodesLookup[toNodeName];
+                fromParserNode.Children.Add(toParserNode);
+                if(!nodeHasParentLookup.ContainsKey(toNodeName))
+                    nodeHasParentLookup.Add(toNodeName, true);
                 lineNumber++;
             }
             foreach (var nodeName in parserNodesLookup.Keys)
             {
-                if (!nodeHasParentLookup.ContainsKey(nodeName))
+                if(!nodeHasParentLookup.ContainsKey(nodeName))
                     rootParserNode.Children.Add(parserNodesLookup[nodeName]);
             }
             _nodesLookup = new Dictionary<string, Node>();
@@ -85,7 +80,7 @@ namespace DViz.SimpleDot
                 return _nodesLookup[n.Name];
             var childs = n.Children.Select(ConvertToNode).ToList();
             var result = new Node(n.Name, childs);
-            _nodesLookup.Add(n.Name, result);
+            _nodesLookup.Add(n.Name,result);
             return result;
         }
 
